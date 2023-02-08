@@ -1,4 +1,5 @@
 const UserModel = require('../models/user')
+const PropertyModel = require('../models/property')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { request, response } = require('express')
@@ -17,10 +18,11 @@ const UserController = {
 
             const userCreate = await UserModel.create({
                 name: user.name,
-                surname: user.surname,
+                first_surname: user.first_surname,
                 second_surname: user.second_surname,
+                num_identification: user.num_identification,
                 email: user.email,
-                status: user.status,
+                telephone: user.telephone,
                 password: hash,
             })
 
@@ -32,12 +34,29 @@ const UserController = {
                 })
             }
 
-            console.log(userCreate)
+            const propertyCreate = await PropertyModel.create({
+                country: user.country,
+                department: user.department,
+                address: user.address,
+                meters: user.meters,
+                levels: user.levels,
+                owner: userCreate._id
+            })
 
+            userCreate.properties.push(propertyCreate._id)
+
+            userCreate.save()
+
+            if (!propertyCreate) {
+                return res.json({
+                    error: true,
+                    msg: 'No se pudo crear la propiedad del usuario'
+                })
+            }
 
             return res.status(201).json({
                 msg: 'Creado',
-                data: userCreate,
+                data: {userCreate, propertyCreate},
                 error: false
             })
 
@@ -84,7 +103,7 @@ const UserController = {
                 expiresIn: '3h'
             }
 
-            const token = jwt.sign(payload, process.env.SECRET)
+            const token = jwt.sign(payload, process.env.SECRET, options)
 
             return res.status(200).json({
                 msg: 'Inicio de sesion correcto',

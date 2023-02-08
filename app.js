@@ -9,7 +9,7 @@ const cors = require('cors')
 mongoose.set('strictQuery', false)
 
 mongoose.connect(process.env.DB_URI).then(() => {
-    console.log('----> CONEXION EXITOSA A LA BASE DE DATOS DE CORGESTACOL')
+    console.log('----> CONEXION EXITOSA A LA BASE DE DATOS DE SERVICIOS DOMESTICOS')
 }).catch(error => {
     console.log('ERROR CONECTANDOSE EN LA BASE DE DATOS MOTIVO ----> ', error)
 })
@@ -25,6 +25,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/api/user', require('./routes/user'))
+app.use('/api/affiliate', require('./routes/affiliate'))
+app.use('/api/service', require('./routes/service'))
 
 
 module.exports = app;

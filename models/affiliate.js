@@ -1,6 +1,6 @@
 const moongose = require('mongoose')
 
-const UserSchema = new moongose.Schema({
+const AffiliateSchema = new moongose.Schema({
     name:{
         type: String,
         required: true
@@ -13,14 +13,34 @@ const UserSchema = new moongose.Schema({
         type: String,
         required: true
     },
-    
     num_identification:{
         type: String,
+        required: true,
+        unique: true    },
+    country_work:{
+        type: String,
+        required: true
+    },
+    department: {
+        type: String,
+        required: true
+    },
+    address:{
+        type: String,
+        required: true
+    },
+    telephone: {
+        type: String,
+        required: true
+    },
+    age:{
+        type: Number,
         required: true
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password:{
         type: String, 
@@ -30,13 +50,13 @@ const UserSchema = new moongose.Schema({
         type: String,
         default: 'ACTIVE'
     },
-    telephone: {
-        type: String,
+    jobs: {
+        type: Array,
         required: true
-    },
+    }
 },
 {
     timestamps: true
 })
 
-module.exports = moongose.model('User', UserSchema)
+module.exports = moongose.model('Affiliate', AffiliateSchema)
