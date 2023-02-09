@@ -1,6 +1,7 @@
 const {request, response} = require('express')
 const AffiliateModel = require('../models/affiliate')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const AffiliateController = {
     create: async (req =  request, res = response) => {
@@ -42,6 +43,57 @@ const AffiliateController = {
         } catch (error) {
             return res.status(500).json({
                 msg:'Error en el servidor ' + error,
+                error: true
+            })
+        }
+    },
+
+    login: async (req = request, res = response) => {
+        try {
+            const { email, password } = req.body
+
+            const affiliateFound = await AffiliateModel.findOne({
+                email: email
+            })
+
+
+            if (!affiliateFound) {
+                return res.status(404).json({
+                    msg: 'Usuario no encontrado',
+                    error: true
+                })
+            }
+
+            const validateHash = bcrypt.compareSync(password, affiliateFound.password)
+
+            if (!validateHash) {
+                return res.status(404).json({
+                    msg: 'Contraseña incorrecta',
+                    error: true
+                })
+            }
+
+            const payload = {
+                id: affiliateFound._id
+            }
+
+            const options = {
+                expiresIn: '3h'
+            }
+
+            const token = jwt.sign(payload, process.env.SECRET, options)
+
+            return res.status(200).json({
+                msg: 'Inicio de sesion correcto',
+                data: {affiliateFound, accessToken: token},
+                error: false,
+
+            })
+
+
+        } catch (error) {
+            return res.status(500).json({
+                msg: 'Error en el servidor ' + error,
                 error: true
             })
         }
