@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken')
 const {request, response } = require('express')
 
 const verifyToken = (req = request, res = response, next  ) => {
-
     const token  = req.headers['authorization'].split(" ")[1]
 
     if(!token){
