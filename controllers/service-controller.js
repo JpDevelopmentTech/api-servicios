@@ -109,7 +109,7 @@ const ServiceController = {
 
             const servicesFound = await ServiceModel.find({
                 owner: id
-            })
+            }).populate('property')
 
             if(!servicesFound){
                 return res.status(200).json({

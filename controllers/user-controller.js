@@ -40,7 +40,8 @@ const UserController = {
                 address: user.address,
                 meters: user.meters,
                 levels: user.levels,
-                owner: userCreate._id
+                owner: userCreate._id,
+                name: 'Propiedad principal'
             })
 
 
@@ -77,7 +78,7 @@ const UserController = {
 
 
             if (!userFound) {
-                return res.status(404).json({
+                return res.status(200).json({
                     msg: 'Usuario no encontrado',
                     error: true
                 })
@@ -86,7 +87,7 @@ const UserController = {
             const validateHash = bcrypt.compareSync(password, userFound.password)
 
             if (!validateHash) {
-                return res.status(404).json({
+                return res.status(200).json({
                     msg: 'Contraseña incorrecta',
                     error: true
                 })
