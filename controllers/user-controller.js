@@ -43,9 +43,6 @@ const UserController = {
                 owner: userCreate._id
             })
 
-            userCreate.properties.push(propertyCreate._id)
-
-            userCreate.save()
 
             if (!propertyCreate) {
                 return res.json({
