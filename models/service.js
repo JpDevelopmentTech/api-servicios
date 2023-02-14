@@ -7,10 +7,6 @@ const ServiceSchema = new moongose.Schema({
         ref: 'Property',
         required: true
     },
-    name:{
-        type: String,
-        required: true
-    },
     jobs:{
         type: Array,
         required: true
