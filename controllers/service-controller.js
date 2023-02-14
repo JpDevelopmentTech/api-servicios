@@ -136,7 +136,7 @@ const ServiceController = {
         try {
             const {id} = req.params
 
-            const serviceFound = await ServiceModel.findById(id).populate('postulates')
+            const serviceFound = await ServiceModel.findById(id).populate(['postulates', 'property'])
 
             if(!serviceFound){
                 return res.status(200).json({
