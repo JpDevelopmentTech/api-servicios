@@ -31,8 +31,11 @@ const PropertyController = {
 
     getPropertiesByUser: async (req = request, res = response) => {
         try {
+
+            const {id} = req.params
+
             const propertiesFound = await PropertyModel.find({
-                owner: req.id
+                owner: id
             })
 
             if(!propertiesFound){
