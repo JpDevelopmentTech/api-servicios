@@ -40,6 +40,10 @@ const ServiceSchema = new moongose.Schema({
         type: Array,
         default: [],
         ref: 'Affiliate'
+    },
+    description: {
+        type: String,
+        required: true
     }
 
 },

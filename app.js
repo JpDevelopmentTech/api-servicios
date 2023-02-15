@@ -27,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/user', require('./routes/user'))
 app.use('/api/affiliate', require('./routes/affiliate'))
 app.use('/api/service', require('./routes/service'))
+app.use('/api/property', require('./routes/property'))
 
 
 module.exports = app;

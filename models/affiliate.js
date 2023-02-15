@@ -53,7 +53,12 @@ const AffiliateSchema = new moongose.Schema({
     jobs: {
         type: Array,
         required: true
-    }
+    },
+    calificate: {
+        type: Number,
+        default: 0
+    },
+    
 },
 {
     timestamps: true
