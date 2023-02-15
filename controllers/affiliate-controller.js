@@ -97,6 +97,32 @@ const AffiliateController = {
                 error: true
             })
         }
+    },
+
+    getAffiliateById: async (req = request, res = response) => {
+        try {
+            const {id} = req.params
+
+            const affiliateFound = await AffiliateModel.findById(id)
+
+            if(!affiliateFound){
+                return res.status(200).json({
+                    msg: 'No se pudo traer al afiliado',
+                    error: true
+                })
+            }
+
+            return res.status(200).json({
+                msg: 'Afiliado traido con exito',
+                error: false,
+                data: affiliateFound
+            })
+        } catch (error) {
+            return res.status(500).json({
+                msg: 'Error en el servidor ' + error,
+                error: true
+            })
+        }
     }
 }
 
