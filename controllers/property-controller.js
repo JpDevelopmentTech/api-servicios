@@ -27,7 +27,33 @@ const PropertyController = {
                 error: false
             })
         }
-    }   
+    },
+
+    getPropertiesByUser: async (req = request, res = response) => {
+        try {
+            const propertiesFound = await PropertyModel.find({
+                owner: req.id
+            })
+
+            if(!propertiesFound){
+                return res.status(200).json({
+                    msg: 'No hay propiedades creadas',
+                    error: true
+                })
+            }
+
+            return res.status(200).json({
+                msg: 'Propiedades traidas con exito',
+                error: false,
+                data: propertiesFound
+            })
+        } catch (error) {
+            return res.status(500).json({
+                msg: 'Error en el servidor ' + error,
+                error: false
+            })
+        }
+    }
 }
 
 module.exports = PropertyController
