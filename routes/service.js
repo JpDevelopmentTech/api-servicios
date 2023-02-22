@@ -8,6 +8,7 @@ router.get('/recommended/:id', ServiceController.getRecommendedServices)
 router.post('/postulate', verifyToken ,ServiceController.postulateService)
 router.get('/user/:id',ServiceController.getServicesByUser)
 router.get('/:id',ServiceController.getServicesById)
+router.post('/contract',ServiceController.contract)
 
 
 

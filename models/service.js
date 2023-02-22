@@ -44,6 +44,10 @@ const ServiceSchema = new moongose.Schema({
     description: {
         type: String,
         required: true
+    },
+    contractor: {
+        type: moongose.Types.ObjectId,
+        ref: 'Affiliate'
     }
 
 },

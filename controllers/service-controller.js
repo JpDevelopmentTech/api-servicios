@@ -157,6 +157,49 @@ const ServiceController = {
                 error: true,
             })
         }
+    },
+    
+    contract: async (req = request, res = response) =>{
+        try {
+            const {idAffiliate, idService} = req.body
+
+            const affiliateFound = await AffiliateModel.findById(idAffiliate)
+            if(!affiliateFound){
+                return res.status(200).json({
+                    msg: 'El afiliado no existe',
+                    error: true
+                })
+            }
+
+            const serviceFound = await ServiceModel.findOneAndUpdate({
+                _id: idService
+            },{
+                contractor: idAffiliate,
+                status: 'IN CURSE'
+            }, 
+            {
+                new: true
+            })
+
+            if(!serviceFound){
+                return res.status(200).json({
+                    msg: 'El servicio no existe',
+                    error: true
+                })
+            }
+
+            return res.status(200).json({
+                msg: 'Ha sido contratado el usuario con exito',
+                data: serviceFound,
+                error: false
+            })
+
+        } catch (error) {
+            return res.status(500).json({
+                msg: 'Error en el servidor ' + error,
+                error: true,
+            })
+        }
     }
 }
 
