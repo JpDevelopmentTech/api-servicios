@@ -158,6 +158,34 @@ const ServiceController = {
             })
         }
     },
+
+    getServicesByContractor: async (req = request, res =  response) => {
+        try {
+            const {id} = req.params
+
+            const services = await ServiceModel.find({
+                contractor: id 
+            })
+
+            if(services == null){
+                return res.status(200).json({
+                    msg: 'No hay servicios de este afiliado',
+                    error: true
+                })
+            }
+            
+            return res.status(200).json({
+                msg: 'Servicios traidos con exito',
+                error: false,
+                data: services
+            })
+        } catch (error) {
+            return res.status(500).json({
+                msg: 'Error en el servidor '+ error,
+                error: true
+            })
+        }
+    },
     
     contract: async (req = request, res = response) =>{
         try {
