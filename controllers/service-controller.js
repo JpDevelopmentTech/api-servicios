@@ -48,7 +48,8 @@ const ServiceController = {
             const serviceFound = await ServiceModel.find({
                 jobs: {
                     $in: jobsAfilliate
-                }
+                },
+                status: 'POSTULATE'
             }).populate(['property', 'owner'])
 
 
