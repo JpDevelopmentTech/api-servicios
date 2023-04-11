@@ -112,9 +112,41 @@ const UserController = {
 
 
         } catch (error) {
-
+            return res.status(500).json({
+                msg: 'Error en el servidor ' + error,
+                error: true
+            })
         }
-    }
+    },
+
+
+    delete: async (req = request, res = response) => {
+        try {
+            const {id} = req.params
+
+            const user = await UserModel.findOneAndDelete({
+                _id: id
+            })
+
+            if(user == null){
+                return res.status(200).json({
+                    msg: 'No se ha podido eliminar el usuario',
+                    error: true,
+                    data: user
+                })
+            }
+
+            return res.status(200).json({
+                msg: 'El usuario fue eliminado con exito',
+                error: false
+            })
+        } catch (error) {
+            return res.status(500).json({
+                msg: 'Error en el servidor ' + error,
+                error: true
+            })
+        }
+    } 
 }
 
 module.exports = UserController

@@ -4,6 +4,7 @@ const AffiliateController = require('../controllers/affiliate-controller')
 
 router.post('/', AffiliateController.create)
 router.post('/auth', AffiliateController.login)
+router.delete('/:id', AffiliateController.delete)
 // DATOS PARA ENVIAR 
 // body = email, password
 

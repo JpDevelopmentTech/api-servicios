@@ -48,6 +48,32 @@ const AffiliateController = {
         }
     },
 
+    delete: async (req= request, res= response) => {
+        try {
+            const {id} = req.params
+
+            const affiliate = await AffiliateModel.findByIdAndDelete(id)
+
+            if(affiliate == null){
+                return res.status(200).json({
+                    msg: 'Error al eliminar el afiliado',
+                    error: true
+                })
+            }
+
+            return res.status(200).json({
+                msg: 'Afiliado eliminado con exito',
+                error: false,
+                data: affiliate
+            })
+        } catch (error) {
+            return res.status(500).json({
+                msg:'Error en el servidor ' + error,
+                error: true
+            })
+        }
+    },
+
     login: async (req = request, res = response) => {
         try {
             const { email, password } = req.body
