@@ -28,6 +28,7 @@ app.use('/api/user', require('./routes/user'))
 app.use('/api/affiliate', require('./routes/affiliate'))
 app.use('/api/service', require('./routes/service'))
 app.use('/api/property', require('./routes/property'))
+app.use('/api/notification', require('./routes/notification'))
 
 
 module.exports = app;
