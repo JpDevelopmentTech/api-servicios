@@ -83,12 +83,15 @@ const ServiceController = {
                 {
                     new: true
                 }
-            )
+            ).populate('owner')
+
+
+
             const title = 'Un nuevo afiliado ha sido postulado a tu servicio'
             const redirect = '/myservices/' + serviceFound._id
 
             const notification = await NotificationService.sendNotification(
-                id, title, redirect
+                serviceFound.owner._id, title, redirect
             )
 
             console.log(notification)
