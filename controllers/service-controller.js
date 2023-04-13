@@ -223,6 +223,15 @@ const ServiceController = {
                 new: true
             })
 
+            const title = 'Has sido contratado para un servicio'
+            const redirect = '/servicios'
+
+            const notification = await NotificationService.sendNotification(
+                idAffiliate, title, redirect
+            )
+
+            console.log(notification)
+
             if(!serviceFound){
                 return res.status(200).json({
                     msg: 'El servicio no existe',
