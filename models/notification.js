@@ -1,13 +1,22 @@
 const moongose = require('mongoose')
 
-const PropertySchema = new moongose.Schema({
+const NotificationSchema = new moongose.Schema({
     title:{
         type: String,
         required: true
     },
     state: {
-
+        type: String, 
+        default: 'UNREAD'
     },
+    send: {
+        type: moongose.Types.ObjectId,
+        required: true
+    },
+    redirect: {
+        type: String,
+        required: true
+    }
 
     
 },
@@ -15,4 +24,4 @@ const PropertySchema = new moongose.Schema({
     timestamps: true
 })
 
-module.exports = moongose.model('Property', PropertySchema)
+module.exports = moongose.model('Notification', NotificationSchema)

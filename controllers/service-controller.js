@@ -2,6 +2,8 @@ const { request, response } = require('express')
 const ServiceModel = require('../models/service')
 const AffiliateModel = require('../models/affiliate')
 const { default: mongoose } = require('mongoose')
+const NotificationService = require('../services/sendNotification')
+const notification = require('../models/notification')
 
 
 const ServiceController = {
@@ -67,7 +69,7 @@ const ServiceController = {
         }
     },
 
-    postulateService: async (req = request, res = response) => {
+     postulateService: async (req = request, res = response) => {
         try {
             const { id } = req.body
 
@@ -82,6 +84,14 @@ const ServiceController = {
                     new: true
                 }
             )
+            const title = 'Un nuevo afiliado ha sido postulado a tu servicio'
+            const redirect = '/myservices/' + serviceFound._id
+
+            const notification = await NotificationService.sendNotification(
+                id, title, redirect
+            )
+
+            console.log(notification)
 
             if (!serviceFound) {
                 return res.status(200).json({
