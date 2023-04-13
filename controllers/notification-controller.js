@@ -36,7 +36,7 @@ const NotificationController = {
             const {id} = req.params
 
             const notification = await NotificationModel.findByIdAndUpdate(id,{
-                status: 'READ'
+                state: 'READ'
             })
 
             if(notification == null){
