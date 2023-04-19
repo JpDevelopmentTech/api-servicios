@@ -16,6 +16,10 @@ const NotificationSchema = new moongose.Schema({
     redirect: {
         type: String,
         required: true
+    },
+    type: {
+        type: String,
+        required: true
     }
 
     

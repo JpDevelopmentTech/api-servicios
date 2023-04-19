@@ -15,12 +15,24 @@ const NotificationController = {
                     msg: 'Este usuario no tiene notificaciones',
                     error: true
                 })
-            }
+            }   
+
+            let counterUnread = 0
+
+            notifications.map(notification => {
+                if(notification.state == 'UNREAD'){
+                    counterUnread++
+
+                }
+            })
 
             return res.status(200).json({
                 msg: 'Notificaciones encontradas con exito',
                 error: false,
-                data: notifications
+                data: {
+                    counterUnread,
+                    notifications
+                }
             })
 
         } catch (error) {

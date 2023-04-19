@@ -1,12 +1,13 @@
 const NotificationModel = require('../models/notification')
 
 const NotificationService = {
-    sendNotification : async (idSend, title, redirect ) => {
+    sendNotification : async (idSend, title, redirect, type ) => {
         try {
             const notification = await NotificationModel.create({
                 title,
                 redirect,
-                send: idSend
+                send: idSend,
+                type: type
             })
 
             if(notification  == null){

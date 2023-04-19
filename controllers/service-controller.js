@@ -89,9 +89,10 @@ const ServiceController = {
 
             const title = 'Un nuevo afiliado ha sido postulado a tu servicio'
             const redirect = '/myservices/' + serviceFound._id
+            const type = 'postulate'
 
             const notification = await NotificationService.sendNotification(
-                serviceFound.owner._id, title, redirect
+                serviceFound.owner._id, title, redirect, type
             )
 
             console.log(notification)
@@ -225,9 +226,10 @@ const ServiceController = {
 
             const title = 'Has sido contratado para un servicio'
             const redirect = '/servicios'
+            const type = 'contract'
 
             const notification = await NotificationService.sendNotification(
-                idAffiliate, title, redirect
+                idAffiliate, title, redirect, type
             )
 
             console.log(notification)
