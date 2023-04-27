@@ -201,6 +201,29 @@ const ServiceController = {
             })
         }
     },
+    start: async () => {
+        try {
+            const {idService} = req.body
+            const service =  await ServiceModel.findByIdAndUpdate(idService)
+            if(!service){
+                return res.status(200).json({
+                    msg: 'No existe el servicio',
+                    error: true
+                })
+            }
+
+            return res.status(200).json({
+                msg:'Servicio empezado con exito',
+                error: false,
+                data: service
+            })
+        } catch (error) {
+            return res.status(200).json({
+                msg: 'Error en el servidor '+ error,
+                error: true
+            })
+        }
+    },
     
     contract: async (req = request, res = response) =>{
         try {
@@ -218,7 +241,7 @@ const ServiceController = {
                 _id: idService
             },{
                 contractor: idAffiliate,
-                status: 'IN CURSE'
+                status: 'CONTRACT'
             }, 
             {
                 new: true
