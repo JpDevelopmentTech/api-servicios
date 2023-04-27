@@ -204,7 +204,9 @@ const ServiceController = {
     start: async (req = request, res = response) => {
         try {
             const {idService} = req.body
-            const service =  await ServiceModel.findByIdAndUpdate(idService)
+            const service =  await ServiceModel.findByIdAndUpdate(idService,{
+                status: 'IN CURSE'
+            })
             if(!service){
                 return res.status(200).json({
                     msg: 'No existe el servicio',
