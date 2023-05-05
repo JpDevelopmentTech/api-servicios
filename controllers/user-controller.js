@@ -34,7 +34,7 @@ const UserController = {
                     msg: 'No se pudo crear el usuario'
                 })
             }
-            const nameImage = userCreate.name + 'firstProperty.jpg'
+            const nameImage = userCreate._id+ 'firstProperty.jpg'
             const uploadFileFirstProperty = await uploadFile(req.files.imageFirstProperty, nameImage)
 
             const propertyCreate = await PropertyModel.create({

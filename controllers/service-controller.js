@@ -4,6 +4,7 @@ const AffiliateModel = require('../models/affiliate')
 const { default: mongoose } = require('mongoose')
 const NotificationService = require('../services/sendNotification')
 const notification = require('../models/notification')
+const { getFileURL } = require('../services/s3')
 
 
 const ServiceController = {
@@ -132,6 +133,11 @@ const ServiceController = {
                     error: true,
                 })
             }
+
+            servicesFound.map((service, index) => {
+                let url = getFileURL(service.image)
+                servicesFound[index] = url
+            })
 
             return res.status(200).json({
                 msg: 'Servicios traidos con exito',
