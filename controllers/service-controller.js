@@ -134,9 +134,11 @@ const ServiceController = {
                 })
             }
 
-            servicesFound.map((service, index) => {
+
+            servicesFound.forEach(service => {
+                
                 let url = getFileURL(service.image)
-                servicesFound.property.image= url
+                service.property.image = url
             })
 
             return res.status(200).json({
