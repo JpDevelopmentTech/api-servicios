@@ -1,6 +1,8 @@
-require('dotenv').config()
-var express = require('express');
 var path = require('path');
+require('dotenv').config({
+    path: path.resolve(__dirname, 'environments', process.env.NODE_ENV.trim() + '.env')
+})
+var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose')
@@ -15,6 +17,11 @@ mongoose.connect(process.env.DB_URI).then(() => {
 })
 
 var app = express();
+
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: './uploads'
+}))
 
 app.use(cors())
 app.use(logger('dev'));

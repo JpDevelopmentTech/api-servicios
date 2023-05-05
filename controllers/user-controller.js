@@ -2,6 +2,7 @@ const UserModel = require('../models/user')
 const PropertyModel = require('../models/property')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const {uploadFile} = require('../services/s3')
 const { request, response } = require('express')
 
 const UserController = {
@@ -33,6 +34,8 @@ const UserController = {
                     msg: 'No se pudo crear el usuario'
                 })
             }
+            const nameImage = userCreate.name + 'firstProperty.jpg'
+            const uploadFileFirstProperty = await uploadFile(req.files.imageFirstProperty, nameImage)
 
             const propertyCreate = await PropertyModel.create({
                 country: user.country,
@@ -41,7 +44,8 @@ const UserController = {
                 meters: user.meters,
                 levels: user.levels,
                 owner: userCreate._id,
-                name: 'Propiedad principal'
+                name: 'Propiedad principal',
+                image: nameImage
             })
 
 
