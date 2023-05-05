@@ -134,10 +134,10 @@ const ServiceController = {
                 })
             }
 
-            servicesFound.map((service, index) => {
-                let url = getFileURL(service.image)
-                servicesFound[index] = url
-            })
+            // servicesFound.map((service, index) => {
+            //     let url = getFileURL(service.image)
+            //     servicesFound[index] = url
+            // })
 
             return res.status(200).json({
                 msg: 'Servicios traidos con exito',
