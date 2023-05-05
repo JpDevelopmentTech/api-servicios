@@ -134,13 +134,6 @@ const ServiceController = {
                 })
             }
 
-
-            servicesFound.forEach(service => {
-                
-                let url = getFileURL(service.image)
-                service.property.image = url
-            })
-
             return res.status(200).json({
                 msg: 'Servicios traidos con exito',
                 error: false,
@@ -154,6 +147,23 @@ const ServiceController = {
             })
         }
     },
+
+    getPictureService: async (req = request, res = response) => {
+        try {
+            const { name } = req.params
+
+            const response = await getFileURL(name)
+
+            res.status(200).json({
+                url: response
+            })
+        } catch (error) {
+            return res.status(500).json({
+                msg: 'Error en el servidor ' + error,
+                error: true
+            })
+        }
+    }, 
 
     getServicesById: async (req = request, res = response) => {
         try {

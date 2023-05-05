@@ -15,6 +15,7 @@ router.get('/:id',ServiceController.getServicesById)
 router.get('/contractor/:id',ServiceController.getServicesByContractor)
 router.post('/contract',ServiceController.contract)
 router.post('/start',ServiceController.start)
+router.get('/picture/:name', ServiceController.getPictureService)
 
 
 //ENDPOINT PARA TRAER LOS SERVICIOS DEL AFILIADO
