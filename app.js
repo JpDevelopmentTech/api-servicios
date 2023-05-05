@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose')
 const cors = require('cors')
+const fileUpload = require('express-fileupload')
 
 mongoose.set('strictQuery', false)
 
