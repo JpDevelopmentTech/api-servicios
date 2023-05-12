@@ -7,7 +7,7 @@ const PropertyController = {
         try {
             const property = req.body
 
-            const nameImage = property.name + property.owner
+            const nameImage = property.name + property.owner + '.jpg'
             const responseImage = await uploadFile(req.files.image, nameImage)
 
             const newProperty = {

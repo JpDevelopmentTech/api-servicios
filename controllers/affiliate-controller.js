@@ -2,6 +2,7 @@ const {request, response} = require('express')
 const AffiliateModel = require('../models/affiliate')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const { uploadFile } = require('../services/s3')
 
 const AffiliateController = {
     create: async (req =  request, res = response) => {
@@ -10,6 +11,13 @@ const AffiliateController = {
 
             const salt = bcrypt.genSaltSync(10)
             const hash = bcrypt.hashSync(affiliate.password, salt)
+
+            const nameImage = affiliate.num_identification + 'frontDocument.jpg'
+            const nameImage2 = affiliate.num_identification + 'backDocument.jpg'
+            await uploadFile(req.files.frontDocument, nameImage)
+            await uploadFile(req.files.backDocument, nameImage2)
+
+            
 
 
             const affiliateCreate = await AffiliateModel.create({
@@ -25,6 +33,10 @@ const AffiliateController = {
                 age: affiliate.age,
                 jobs: affiliate.jobs,
                 password: hash,
+                images: {
+                    front: nameImage,
+                    back: nameImage2
+                }
             })
 
             if(!affiliateCreate){
