@@ -10,7 +10,12 @@ const PropertyController = {
             const nameImage = property.name + property.owner
             const responseImage = await uploadFile(req.files.image, nameImage)
 
-            const propertyCreated = await PropertyModel.create(property)
+            const newProperty = {
+                ...property,
+                image:nameImage
+            }
+
+            const propertyCreated = await PropertyModel.create(newProperty)
 
             if(!propertyCreated){
                 return res.status(200).json({
