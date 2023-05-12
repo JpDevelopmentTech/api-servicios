@@ -89,7 +89,7 @@ const ServiceController = {
 
 
             const title = 'Un nuevo afiliado ha sido postulado a tu servicio'
-            const redirect = '/myservices/' + serviceFound._id
+            const redirect = '/anna/myservices/' + serviceFound._id
             const type = 'postulate'
 
             const notification = await NotificationService.sendNotification(
