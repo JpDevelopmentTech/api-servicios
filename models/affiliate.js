@@ -58,6 +58,16 @@ const AffiliateSchema = new moongose.Schema({
         type: Number,
         default: 0
     },
+    image: {
+        front:{
+            type:String,
+            required: true
+        },
+        back: {
+            type: String,
+            required: true
+        }
+    }
     
 },
 {
