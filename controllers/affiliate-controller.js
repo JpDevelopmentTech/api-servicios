@@ -33,7 +33,7 @@ const AffiliateController = {
                 age: affiliate.age,
                 jobs: affiliate.jobs,
                 password: hash,
-                images: {
+                image: {
                     front: nameImage,
                     back: nameImage2
                 }
