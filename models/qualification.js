@@ -6,7 +6,7 @@ const CualificationSchema = new moongose.Schema({
         required: true
     },
     message: {
-        type: Text,
+        type: String,
         required: true
     },
     qualification: {
