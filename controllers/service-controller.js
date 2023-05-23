@@ -119,6 +119,33 @@ const ServiceController = {
         }
     },
 
+    changeStatus: async(req = request, res = response) => {
+        try {
+            const {id, status} = req.params
+            const service = await ServiceModel.findByIdAndUpdate(id,{
+                status: status,
+            })
+
+            if(!service){
+                return res.status(200).json({
+                    msg: 'Error al actualizar el servicio',
+                    error: true
+                })
+            }
+
+            return res.status(200).json({
+                msg:'Servicio actualizado con exito',
+                error: false,
+                data: service
+            })
+        } catch (error) {
+            return res.status(500).json({
+                msg: 'Error en el servidor ' + error,
+                error: true,
+            })
+        }
+    },
+
     getServicesByUser:  async (req = request, res = response) => {
         try {
             const {id} = req.params
