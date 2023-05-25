@@ -12,8 +12,17 @@ const QualificationController = {
                     error: true
                 })
             }
-        } catch (error) {
 
+            return res.status(200).json({
+                msg: 'La calificacion ha sido creada con exito',
+                error: false,
+                data: qualificationCreated
+            })
+        } catch (error) {
+            return res.status(500).json({
+                msg: 'Error en el servidor ' + error,
+                error: true
+            })
         }
     }
 }
